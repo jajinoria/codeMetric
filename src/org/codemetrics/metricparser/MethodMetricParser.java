@@ -12,7 +12,7 @@ import org.codemetrics.codeline.CodeLine;
 public class MethodMetricParser {
     
     public int getNumberOfParameters(Method method){
-        return 0;
+        return method.getParameterTypes().length;
     }
     
     public CodeLine getCodeLines(File sourceFile){
