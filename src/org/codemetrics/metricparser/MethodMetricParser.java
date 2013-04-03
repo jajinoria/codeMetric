@@ -19,7 +19,7 @@ public class MethodMetricParser {
     private BufferedReader buffer=null;
     
     public int getNumberOfParameters(Method method){
-        return 0;
+        return method.getParameterTypes().length;
     }
     
     public CodeLine getCodeLines(File sourceFile, Method method){
