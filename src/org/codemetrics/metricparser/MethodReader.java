@@ -67,12 +67,6 @@ public class MethodReader {
     public boolean atEndOfMethod(){
         return this.keyMethodStack.empty();
     }
-   
-    private boolean containsMetaExpression(String metaExpression, String expression) {
-        Pattern pattern = Pattern.compile(metaExpression);
-        Matcher matcher = pattern.matcher(expression);
-        return matcher.find();
-    }
 
     public void closeMethodReader() {
         if (buffer != null) {
@@ -90,6 +84,12 @@ public class MethodReader {
         String metaExpression = "(" + enclosedBySpaces + ")|(" + followedByParameters + ")";
         String methodFlag = "private|public|protected";
         return containsMetaExpression(methodFlag, codeLine) & containsMetaExpression(metaExpression, codeLine);
+    }
+    
+    private boolean containsMetaExpression(String metaExpression, String expression) {
+        Pattern pattern = Pattern.compile(metaExpression);
+        Matcher matcher = pattern.matcher(expression);
+        return matcher.find();
     }
 
     private void updateStack(String key) {

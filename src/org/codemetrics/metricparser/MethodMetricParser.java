@@ -27,14 +27,15 @@ public class MethodMetricParser {
         int startOfMethod = fileReader.getCurrentLineNumber();
         
         do{
-           String line = fileReader.readLine();
-           
+           fileReader.readLine();
         }while(!fileReader.atEndOfMethod());
         
         int endOfMethod = fileReader.getCurrentLineNumber();
-        fileReader.closeMethodReader();
         
-        return null;
+        fileReader.closeMethodReader();
+        codeLine.setEffectiveCodeLines(endOfMethod-startOfMethod+1);
+        
+        return codeLine;
     }
     
     private class MethodLocation{
