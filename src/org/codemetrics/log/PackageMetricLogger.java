@@ -1,7 +1,6 @@
 package org.codemetrics.log;
 
 import org.codemetrics.log.writer.Writer;
-import org.codemetrics.metricparser.ClassMetricParser;
 import org.codemetrics.metricparser.PackageMetricParser;
 
 public class PackageMetricLogger extends Logger {
