@@ -37,4 +37,16 @@ public class CodeLine {
     public int getTotalCodeLines(){
         return effectiveCodeLines + commentCodeLines + emptyCodeLines;
     }
+    
+    public void incrementCommentCodeLines(){
+        this.commentCodeLines++;
+    }
+    
+    public void incrementEmptyCodeLines(){
+        this.emptyCodeLines++;
+    }
+    
+    public void incrementCodeLines(){
+        this.commentCodeLines++;
+    }
 }
