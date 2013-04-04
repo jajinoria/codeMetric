@@ -34,7 +34,7 @@ public class MethodMetricParser {
         }  catch (IOException ex) {
             Logger.getLogger(MethodMetricParser.class.getName()).log(Level.SEVERE, null, ex);
         }
-        throw new RuntimeException();
+        throw new RuntimeException("Could not read file properly");
     }
 
     private CodeLine getCodeLines(File sourceFile, String methodName) throws FileNotFoundException, IOException{
