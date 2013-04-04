@@ -13,4 +13,6 @@ public interface Writer {
     public void writeNumberOfParameters(int numberOfParameters);
     public void writeCodeLines(CodeLine codeline);
     public void close();
+
+    public void setFile(String filename);
 }

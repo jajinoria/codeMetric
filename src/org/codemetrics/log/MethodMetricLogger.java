@@ -9,13 +9,15 @@ import org.codemetrics.metricparser.MethodMetricParser;
  *
  * @author Daniel & Jose & Johanna
  */
-public class MethodMetricLogger extends Log{
+public class MethodMetricLogger extends Logger{
     private MethodMetricParser methodMetricParser;
     private Writer writer;
     
-    public MethodMetricLogger (Writer writer){
+    public MethodMetricLogger (String filename, Writer writer){
+        super(filename);
         this.methodMetricParser = new MethodMetricParser();
         this.writer = writer;
+        this.writer.setFile(this.filename);
     }
 
     public MethodMetricParser getMethodMetricParser() {

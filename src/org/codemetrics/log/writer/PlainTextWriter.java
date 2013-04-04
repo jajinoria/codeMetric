@@ -10,19 +10,9 @@ import org.codemetrics.codeline.CodeLine;
 
 public class PlainTextWriter implements Writer {
 
-    private String fileName;
+    private String filename;
     private FileWriter outFile;
     private PrintWriter out;
-
-    public PlainTextWriter(String fileName) {
-        try {
-            this.fileName = fileName;
-            this.outFile = new FileWriter(this.fileName);
-            this.out = new PrintWriter(this.outFile);
-        } catch (IOException ex) {
-            Logger.getLogger(PlainTextWriter.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 
     @Override
     public void writeTitle(String name) {
@@ -64,5 +54,16 @@ public class PlainTextWriter implements Writer {
     @Override
     public void close() {
         this.out.close();
+    }
+
+    @Override
+    public void setFile(String filename) {
+        try {
+            this.filename = filename;
+            this.outFile = new FileWriter(this.filename);
+            this.out = new PrintWriter(this.outFile);
+        } catch (IOException ex) {
+            Logger.getLogger(PlainTextWriter.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

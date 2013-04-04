@@ -10,24 +10,13 @@ import java.util.logging.Logger;
 import org.codemetrics.codeline.CodeLine;
 
 public class PDFWriter implements Writer {
-    private String fileName;
+    private String filename;
     private Document document;
     private Paragraph paragraph;
 
     private Font small = new Font(Font.FontFamily.TIMES_ROMAN, 12);
     private Font red = new Font(Font.FontFamily.TIMES_ROMAN, 10,
       Font.NORMAL, BaseColor.RED);
-
-    public PDFWriter(String fileName) {
-        this.fileName = fileName;
-        this.paragraph = new Paragraph();
-        try {
-            this.document = new Document();
-            PdfWriter.getInstance(this.document, new FileOutputStream(this.fileName));
-            this.document.open();
-        } catch (FileNotFoundException | DocumentException e) {
-        }
-    }
 
     @Override
     public void writeTitle(String title) {
@@ -109,5 +98,17 @@ public class PDFWriter implements Writer {
 
     private void addCodeLines(CodeLine codeline) {
         this.paragraph.add(new Paragraph("CodeLines: " + codeline.getTotalCodeLines(), small));
+    }
+
+    @Override
+    public void setFile(String filename) {
+        this.filename = filename;
+        this.paragraph = new Paragraph();
+        try {
+            this.document = new Document();
+            PdfWriter.getInstance(this.document, new FileOutputStream(this.filename));
+            this.document.open();
+        } catch (FileNotFoundException | DocumentException e) {
+        }
     }
 }
