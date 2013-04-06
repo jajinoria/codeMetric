@@ -7,7 +7,7 @@ import java.io.FileOutputStream;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.codemetrics.codeline.CodeLine;
+import org.codemetrics.codeline.CodeLineMetric;
 
 public class PDFWriter implements Writer {
     private String filename;
@@ -49,7 +49,7 @@ public class PDFWriter implements Writer {
     }
 
     @Override
-    public void writeCodeLines(CodeLine codeline) {
+    public void writeCodeLines(CodeLineMetric codeline) {
         addCodeLines(codeline);
     }
     
@@ -96,7 +96,7 @@ public class PDFWriter implements Writer {
         this.paragraph.add(new Paragraph("Number of parameters: " + numberOfParameters, small));
     }
 
-    private void addCodeLines(CodeLine codeline) {
+    private void addCodeLines(CodeLineMetric codeline) {
         this.paragraph.add(new Paragraph("CodeLines: " + codeline.getTotalCodeLines(), small));
     }
 

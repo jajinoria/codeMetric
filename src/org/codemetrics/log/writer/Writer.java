@@ -2,7 +2,7 @@
 package org.codemetrics.log.writer;
 
 import java.util.Date;
-import org.codemetrics.codeline.CodeLine;
+import org.codemetrics.codeline.CodeLineMetric;
 
 public interface Writer {
     public void writeTitle(String string);
@@ -11,7 +11,7 @@ public interface Writer {
     public void writeClassName(String string);
     public void writeMethodName(String string);
     public void writeNumberOfParameters(int numberOfParameters);
-    public void writeCodeLines(CodeLine codeline);
+    public void writeCodeLines(CodeLineMetric codeline);
     public void close();
 
     public void setFile(String filename);

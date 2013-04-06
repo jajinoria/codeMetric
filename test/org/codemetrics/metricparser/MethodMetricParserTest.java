@@ -24,16 +24,18 @@ public class MethodMetricParserTest {
     
     private void initializeMethods(){
         FileCompiler compiler = new FileCompiler();
-        String outPutFolder = "C:/Users/usuario/Documents/NetBeansProjects";  
+        String outPutFolder = "C:/Users/Johanna/Documents/NetBeansProjects";  
+        
+
         if(
           compiler.compileJavaFile(getFile().getAbsolutePath(), outPutFolder) ){
-          Class loadedClass = (new ClassLoader()).loadJavaClass(outPutFolder, "org.codemetrics.classloader.ClassLoader");
+          Class loadedClass = (new ClassLoader()).loadJavaClass(outPutFolder, "integerToStringManually.IntegerToStringManually");
           this.methods = loadedClass.getMethods();
         }
     }
     
     private File getFile() {
-        File file = new File("C:/Users/usuario/Documents/NetBeansProjects/CodeMetrics/src/org/codemetrics/classloader/ClassLoader.java");
+        File file = new File("C:/Users/Johanna/Documents/NetBeansProjects/interviews/src/integerToStringManually/IntegerToStringManually.java");
         return file;
     }
 }

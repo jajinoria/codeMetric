@@ -6,7 +6,7 @@ import java.io.PrintWriter;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.codemetrics.codeline.CodeLine;
+import org.codemetrics.codeline.CodeLineMetric;
 
 public class PlainTextWriter implements Writer {
 
@@ -48,7 +48,7 @@ public class PlainTextWriter implements Writer {
     }
 
     @Override
-    public void writeCodeLines(CodeLine codeline) {
+    public void writeCodeLines(CodeLineMetric codeline) {
     }
 
     @Override

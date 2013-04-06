@@ -5,7 +5,7 @@ package org.codemetrics.codeline;
  *
  * @author Daniel & Jose & Johanna
  */
-public class CodeLine {
+public class CodeLineMetric {
     private int effectiveCodeLines;
     private int commentCodeLines;
     private int emptyCodeLines;

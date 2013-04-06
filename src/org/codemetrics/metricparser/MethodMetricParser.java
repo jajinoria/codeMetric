@@ -3,7 +3,7 @@ package org.codemetrics.metricparser;
 
 import java.io.File;
 import java.lang.reflect.Method;
-import org.codemetrics.codeline.CodeLine;
+import org.codemetrics.codeline.CodeLineMetric;
 
 /**
  *
@@ -15,36 +15,29 @@ public class MethodMetricParser {
         return method.getParameterTypes().length;
     }
     
-    public CodeLine getCodeLines(File sourceFile, Method method) {
+    public CodeLineMetric getCodeLines(File sourceFile, Method method) {
             return parseCodeLines(sourceFile, method.getName());
     }
 
-    private CodeLine parseCodeLines(File sourceFile, String methodName) {       
-        MethodReader fileReader = new MethodReader(sourceFile);
-        CodeLine codeLine = new CodeLine();
+    private CodeLineMetric parseCodeLines(File sourceFile, String methodName) {       
+        MethodReader methodReader = new MethodReader(sourceFile);
+        CodeLineMetric codeLine = new CodeLineMetric();
         
-        fileReader.goToStartOfMethod(methodName);
-        int startOfMethod = fileReader.getCurrentLineNumber();
+        methodReader.goToStartOfMethod(methodName);
+        int startOfMethod = methodReader.getCurrentLineNumber();
+        int a=-1;
         
-        do{
-           fileReader.readLine();
-        }while(!fileReader.atEndOfMethod());
+        //do{
+        if(methodReader.readLine().isEmpty())
+               a = 23;
+        //}while(!methodReader.atEndOfMethod());
         
-        int endOfMethod = fileReader.getCurrentLineNumber();
+        int endOfMethod = methodReader.getCurrentLineNumber();
         
-        fileReader.closeMethodReader();
-        codeLine.setEffectiveCodeLines(endOfMethod-startOfMethod+1);
+        methodReader.closeMethodReader();
+        codeLine.setEffectiveCodeLines(a);
         
         return codeLine;
     }
     
-    private class MethodLocation{
-        public int startLine;
-        public int finishLine;
-        
-        public MethodLocation(int start, int finish){
-            startLine = start;
-            finishLine = finish;
-        }
-    }
 }
