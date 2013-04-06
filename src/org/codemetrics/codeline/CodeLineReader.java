@@ -30,7 +30,7 @@ public class CodeLineReader {
     }
     
     private boolean isEmptyLine(){
-        String writtenLineMetaExpression = "\\d|\\w|//|\\*|/";
+        String writtenLineMetaExpression = "\\d|\\w|\\S";
         return !containsMetaExpression(writtenLineMetaExpression, codeLine);
     }
     

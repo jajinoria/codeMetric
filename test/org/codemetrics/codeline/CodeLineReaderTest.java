@@ -112,7 +112,7 @@ public class CodeLineReaderTest {
         this.trueCode = new String[]{
             "private void setUpCode()",
             "void",
-            "int a = 2345;",
+            "}",
             "String fish=\" I am a fish \" ",
         };
         

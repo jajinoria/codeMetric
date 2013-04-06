@@ -1,11 +1,8 @@
 package org.codemetrics.metricparser;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class ClassMetricParser {
 

@@ -1,4 +1,4 @@
-package org.codemetrics.metricparser;
+package org.codemetrics.codeline;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.codemetrics.metricparser.MethodMetricParser;
 
 
 /**

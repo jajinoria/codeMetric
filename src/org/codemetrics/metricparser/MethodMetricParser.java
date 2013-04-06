@@ -1,9 +1,12 @@
 
 package org.codemetrics.metricparser;
 
+import org.codemetrics.codeline.MethodReader;
 import java.io.File;
 import java.lang.reflect.Method;
 import org.codemetrics.codeline.CodeLineMetric;
+import org.codemetrics.codeline.CodeLineReader;
+import org.codemetrics.codeline.CodeLineType;
 
 /**
  *
@@ -11,33 +14,41 @@ import org.codemetrics.codeline.CodeLineMetric;
  */
 public class MethodMetricParser {
     
+    private CodeLineMetric codeLineMetric = new CodeLineMetric();
+    
     public int getNumberOfParameters(Method method){
         return method.getParameterTypes().length;
     }
     
     public CodeLineMetric getCodeLines(File sourceFile, Method method) {
-            return parseCodeLines(sourceFile, method.getName());
+            return analizeCodeLine(sourceFile, method.getName());
     }
 
-    private CodeLineMetric parseCodeLines(File sourceFile, String methodName) {       
+    private CodeLineMetric analizeCodeLine(File sourceFile, String methodName) {       
         MethodReader methodReader = new MethodReader(sourceFile);
-        CodeLineMetric codeLine = new CodeLineMetric();
         
         methodReader.goToStartOfMethod(methodName);
-        int startOfMethod = methodReader.getCurrentLineNumber();
-        int a=-1;
         
-        //do{
-        if(methodReader.readLine().isEmpty())
-               a = 23;
-        //}while(!methodReader.atEndOfMethod());
+        CodeLineReader codeLineReader = new CodeLineReader();
+        do{
+            upDateCodeLineMetric(codeLineReader.determineCodeLineType(methodReader.readLine()));
+        }while(!methodReader.atEndOfMethod());
         
-        int endOfMethod = methodReader.getCurrentLineNumber();
-        
-        methodReader.closeMethodReader();
-        codeLine.setEffectiveCodeLines(a);
-        
-        return codeLine;
+        methodReader.closeMethodReader();        
+        return codeLineMetric;
+    }
+
+    private void upDateCodeLineMetric(CodeLineType codeLineType) {
+        if(codeLineType.equals(CodeLineType.COMMENT))
+            codeLineMetric.incrementCommentLines();
+        if(codeLineType.equals(CodeLineType.EFFECTIVE))
+            codeLineMetric.incrementEffectiveLines();
+        if(codeLineType.equals(CodeLineType.EMPTY))
+            codeLineMetric.incrementEmptyLines();
+        if(codeLineType.equals(CodeLineType.COMMENT_IN_EFFECTIVE)){
+            codeLineMetric.incrementCommentLines();
+            codeLineMetric.incrementEffectiveLines();
+        }        
     }
     
 }

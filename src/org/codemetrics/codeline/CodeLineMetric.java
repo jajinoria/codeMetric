@@ -9,28 +9,16 @@ public class CodeLineMetric {
     private int effectiveCodeLines;
     private int commentCodeLines;
     private int emptyCodeLines;
-
-    public void setEffectiveCodeLines(int effectiveCodeLines) {
-        this.effectiveCodeLines = effectiveCodeLines;
-    }
-
-    public void setCommentCodeLines(int commentCodeLines) {
-        this.commentCodeLines = commentCodeLines;
-    }
-
-    public void setEmptyCodeLines(int emptyCodeLines) {
-        this.emptyCodeLines = emptyCodeLines;
-    }
-    
-    public int getEffectiveCodeLines(){
+   
+    public int getEffectiveLines(){
         return effectiveCodeLines;
     }
     
-    public int getCommentCodeLines(){
+    public int getCommentLines(){
         return commentCodeLines;
     }
     
-    public int getEmptyCodeLines(){
+    public int getEmptyLines(){
         return emptyCodeLines;
     }
     
@@ -38,15 +26,15 @@ public class CodeLineMetric {
         return effectiveCodeLines + commentCodeLines + emptyCodeLines;
     }
     
-    public void incrementCommentCodeLines(){
+    public void incrementCommentLines(){
         this.commentCodeLines++;
     }
     
-    public void incrementEmptyCodeLines(){
+    public void incrementEmptyLines(){
         this.emptyCodeLines++;
     }
     
-    public void incrementCodeLines(){
-        this.commentCodeLines++;
+    public void incrementEffectiveLines(){
+        this.effectiveCodeLines++;
     }
 }
