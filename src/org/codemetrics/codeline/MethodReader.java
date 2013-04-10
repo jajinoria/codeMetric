@@ -7,21 +7,19 @@ import java.io.IOException;
 import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import org.codemetrics.metricparser.MethodMetricParser;
 
 
 /**
  *
- * @author usuario
+ * @author Johanna
  */
 public class MethodReader {
     
     private Stack keyMethodStack = new Stack();
     private BufferedReader buffer = null;
     private int lineNumber=0;
-    private boolean readingMethod = false;
+    private boolean startOfMethodFound = false;
     
     public MethodReader(File sourceFile){
         try {
@@ -36,7 +34,7 @@ public class MethodReader {
         while ((codeLine = readLine() ) != null) {
             if (isMethod(codeLine, methodName)) {
                 tryToUpdateKeyStack(codeLine);
-                readingMethod = true;
+                startOfMethodFound = true;
                 break;
             }
         }
@@ -46,12 +44,12 @@ public class MethodReader {
         lineNumber++;
         try {
             String methodLine = buffer.readLine();
-            if(readingMethod) tryToUpdateKeyStack(methodLine);
+            if(startOfMethodFound) tryToUpdateKeyStack(methodLine);
             return  methodLine;
         } catch (IOException ex) {
             Logger.getLogger(MethodReader.class.getName()).log(Level.SEVERE, null, ex);
         }
-        throw new RuntimeException("Problems reading the next line");
+        throw new RuntimeException("Problems reading the next line in a method");
     }
     
     private void tryToUpdateKeyStack(String codeLine) {
@@ -80,17 +78,8 @@ public class MethodReader {
     }
 
     private boolean isMethod(String codeLine, String methodName) {
-        String enclosedBySpaces = "\\s" + methodName + "\\s";
-        String followedByParameters = "\\s" + methodName + "\\(";
-        String metaExpression = "(" + enclosedBySpaces + ")|(" + followedByParameters + ")";
-        String methodFlag = "private|public|protected";
-        return containsMetaExpression(methodFlag, codeLine) & containsMetaExpression(metaExpression, codeLine);
-    }
-    
-    private boolean containsMetaExpression(String metaExpression, String expression) {
-        Pattern pattern = Pattern.compile(metaExpression);
-        Matcher matcher = pattern.matcher(expression);
-        return matcher.find();
+       CodeLineAnalyzer codeLineAnalyzer = new CodeLineAnalyzer();
+       return codeLineAnalyzer.isMethod(codeLine, methodName);
     }
 
     private void updateStack(String key) {

@@ -6,8 +6,8 @@ import java.lang.reflect.Method;
 import org.codemetrics.classloader.ClassLoader;
 import org.codemetrics.classloader.FileCompiler;
 import org.codemetrics.codeline.CodeLineMetric;
-import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Test;
 
 /**
  *

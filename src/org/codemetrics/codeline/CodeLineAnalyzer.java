@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
  *
  * @author Johanna 
  */
-public class CodeLineReader {
+public class CodeLineAnalyzer {
     
     private String codeLine;
     
@@ -65,21 +65,21 @@ public class CodeLineReader {
         }
         return ocurrences;
     } 
-     
-    private boolean isCommentLineOnly(){
-        if(commentIsPrecededByCode(startOfComment())) return false;
-        if(commentIsFollowedByCode(endOfComment())) return false;
-        return true;
-    }
     
     private int startOfComment(){
         int symbolIndexInArray=-1;
         
         for(String symbol:getCommentSymbols())
-            if( ( symbolIndexInArray=codeLine.indexOf(symbol) ) != -1) break;
-        
-        
+            if( ( symbolIndexInArray=codeLine.indexOf(symbol) ) != -1) 
+                break;
+              
         return symbolIndexInArray;
+    }
+     
+    private boolean isCommentLineOnly(){
+        if(commentIsPrecededByCode(startOfComment())) return false;
+        if(commentIsFollowedByCode(endOfComment())) return false;
+        return true;
     }
     
     private ArrayList<String> getCommentSymbols(){
@@ -108,6 +108,16 @@ public class CodeLineReader {
     private boolean commentInCodeLine(String line){
         String codeMetaExpression = "\\d|\\w";
         return containsMetaExpression(codeMetaExpression, line);
+    }
+
+    public boolean isMethod(String codeLine, String methodName) {
+        String enclosedBySpaces = "\\s" + methodName + "\\s";
+        String followedByParameters = "\\s" + methodName + "\\(";
+        String metaExpression = "(" + enclosedBySpaces + ")|(" + followedByParameters + ")";
+        String methodFlag = "private|public|protected";
+        
+        return containsMetaExpression(methodFlag, codeLine) 
+                & containsMetaExpression(metaExpression, codeLine);
     }
 
 }

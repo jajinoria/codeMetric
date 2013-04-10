@@ -26,7 +26,7 @@ public class CodeLineReaderTest {
 
     @Test
     public void testAssertTrueCommentLine() {
-       CodeLineReader codeLineReader = new CodeLineReader();
+       CodeLineAnalyzer codeLineReader = new CodeLineAnalyzer();
 
        assertTrue(codeLineReader.determineCodeLineType(this.trueComments[0]).equals(CodeLineType.COMMENT));
        assertTrue(codeLineReader.determineCodeLineType(this.trueComments[1]).equals(CodeLineType.COMMENT));
@@ -40,7 +40,7 @@ public class CodeLineReaderTest {
     
     @Test
     public void testAssertFalseCommentLine() {
-       CodeLineReader codeLineReader = new CodeLineReader();
+       CodeLineAnalyzer codeLineReader = new CodeLineAnalyzer();
 
        assertFalse(codeLineReader.determineCodeLineType(this.falseComments[0]).equals(CodeLineType.COMMENT));
        assertFalse(codeLineReader.determineCodeLineType(this.falseComments[1]).equals(CodeLineType.COMMENT));
@@ -52,7 +52,7 @@ public class CodeLineReaderTest {
     
     @Test
     public void testAssertTrueCodeLine() {
-       CodeLineReader codeLineReader = new CodeLineReader();
+       CodeLineAnalyzer codeLineReader = new CodeLineAnalyzer();
 
        assertTrue(codeLineReader.determineCodeLineType(this.trueCode[0]).equals(CodeLineType.EFFECTIVE));
        assertTrue(codeLineReader.determineCodeLineType(this.trueCode[1]).equals(CodeLineType.EFFECTIVE));
@@ -62,7 +62,7 @@ public class CodeLineReaderTest {
     
     @Test
     public void testAssertFalseCodeLine() {
-       CodeLineReader codeLineReader = new CodeLineReader();
+       CodeLineAnalyzer codeLineReader = new CodeLineAnalyzer();
 
        assertFalse(codeLineReader.determineCodeLineType(this.falseCode[0]).equals(CodeLineType.EFFECTIVE));
        assertFalse(codeLineReader.determineCodeLineType(this.falseCode[1]).equals(CodeLineType.EFFECTIVE));
@@ -71,7 +71,7 @@ public class CodeLineReaderTest {
     
     @Test
     public void testAssertTrueCommentAndEffective() {
-       CodeLineReader codeLineReader = new CodeLineReader();
+       CodeLineAnalyzer codeLineReader = new CodeLineAnalyzer();
 
        assertTrue(codeLineReader.determineCodeLineType(this.trueCommentAndEffective[0]).equals(CodeLineType.COMMENT_IN_EFFECTIVE));
        assertTrue(codeLineReader.determineCodeLineType(this.trueCommentAndEffective[1]).equals(CodeLineType.COMMENT_IN_EFFECTIVE));
@@ -80,7 +80,7 @@ public class CodeLineReaderTest {
     
     @Test
     public void testAssertTrueEmpty() {
-       CodeLineReader codeLineReader = new CodeLineReader();
+       CodeLineAnalyzer codeLineReader = new CodeLineAnalyzer();
 
        assertTrue(codeLineReader.determineCodeLineType(" \n").equals(CodeLineType.EMPTY));
        assertTrue(codeLineReader.determineCodeLineType("     \n").equals(CodeLineType.EMPTY)); 

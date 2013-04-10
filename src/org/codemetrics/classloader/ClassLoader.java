@@ -24,7 +24,7 @@ public class ClassLoader {
         } catch (ClassNotFoundException | MalformedURLException ex) {
             Logger.getLogger(ClassLoader.class.getName()).log(Level.SEVERE, null, ex);
         }
-        throw new RuntimeException();
+        throw new RuntimeException(" There was a problema with custom ClassLoader");
     }
     
 }

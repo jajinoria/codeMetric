@@ -5,7 +5,7 @@ import org.codemetrics.codeline.MethodReader;
 import java.io.File;
 import java.lang.reflect.Method;
 import org.codemetrics.codeline.CodeLineMetric;
-import org.codemetrics.codeline.CodeLineReader;
+import org.codemetrics.codeline.CodeLineAnalyzer;
 import org.codemetrics.codeline.CodeLineType;
 
 /**
@@ -29,7 +29,7 @@ public class MethodMetricParser {
         
         methodReader.goToStartOfMethod(methodName);
         
-        CodeLineReader codeLineReader = new CodeLineReader();
+        CodeLineAnalyzer codeLineReader = new CodeLineAnalyzer();
         do{
             upDateCodeLineMetric(codeLineReader.determineCodeLineType(methodReader.readLine()));
         }while(!methodReader.atEndOfMethod());
