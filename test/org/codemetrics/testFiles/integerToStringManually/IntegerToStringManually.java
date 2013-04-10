@@ -1,5 +1,5 @@
 
-package integerToStringManually;
+package org.codemetrics.testFiles.integerToStringManually;
 
 import java.util.Stack;
 
@@ -15,7 +15,7 @@ public class IntegerToStringManually {
            stack.push(number%10);
             number = number/10;
         }
-       // return toStringWithStack();
+        //int a = 5;
         return "hello";
     }
     
