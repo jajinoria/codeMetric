@@ -30,7 +30,7 @@ public class MethodMetricParserTest {
     
     private void initializeMethods(){
         FileCompiler compiler = new FileCompiler();
-        String outPutFolder = "C:/Users/Johanna/Documents/NetBeansProjects/CodeMetrics/test/org/codemetrics"; 
+        String outPutFolder = "test/org/codemetrics"; 
 
         if(
           compiler.compileJavaFile(getFile().getAbsolutePath(), outPutFolder) ){
@@ -41,7 +41,7 @@ public class MethodMetricParserTest {
     
     private File getFile() {
         File file = new File
-       ("C:/Users/Johanna/Documents/NetBeansProjects/CodeMetrics/test/org/codemetrics/testFiles/"
+       ("test/org/codemetrics/testFiles/"
                 + "integerToStringManually/IntegerToStringManually.java"); 
         return file;
     }

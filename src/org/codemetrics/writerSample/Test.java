@@ -13,7 +13,7 @@ public class Test {
         m.log();
         
         ClassMetricParser c = new ClassMetricParser();
-        System.out.println(c.getNumberOfImports("C:/Users/usuario/Documents/NetBeansProjects/CodeMetrics/src/org/codemetrics/writerSample/Test.java"));
+       // System.out.println(c.getNumberOfImports(c.getClass()));
         
     }
     
