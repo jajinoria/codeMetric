@@ -22,15 +22,15 @@ public class MethodMetricParserTest {
         MethodMetricParser methodParser = new MethodMetricParser();
         initializeMethods();
         CodeLineMetric metric = methodParser.getCodeLines(getFile(), methods[0]);
+        assertTrue(metric.getEffectiveLines()==6);
         assertTrue(metric.getCommentLines()==1);
         assertTrue(metric.getEmptyLines()==0);
-        assertTrue(metric.getEffectiveLines()==6);
         assertTrue(metric.getTotalCodeLines()==7);
     }
     
     private void initializeMethods(){
         FileCompiler compiler = new FileCompiler();
-        String outPutFolder = "compiledTestFiles/"; 
+        String outPutFolder = "test/org/codemetrics"; 
 
         if(
           compiler.compileJavaFile(getFile().getAbsolutePath(), outPutFolder) ){
