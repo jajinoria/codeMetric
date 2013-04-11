@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Scanner;
-import org.codemetrics.classloader.FileCompiler;
+import org.codemetrics.classloader.CodeMetricsClassLoader;
 
 public class ClassMetricParser {
 

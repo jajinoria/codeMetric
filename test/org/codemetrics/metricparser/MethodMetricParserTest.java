@@ -2,9 +2,11 @@
 package org.codemetrics.metricparser;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Method;
-import org.codemetrics.classloader.ClassLoader;
-import org.codemetrics.classloader.FileCompiler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.codemetrics.classloader.CodeMetricsClassLoader;
 import org.codemetrics.codeline.CodeLineMetric;
 import static org.junit.Assert.*;
 import org.junit.Test;
@@ -29,14 +31,9 @@ public class MethodMetricParserTest {
     }
     
     private void initializeMethods(){
-        FileCompiler compiler = new FileCompiler();
-        String outPutFolder = "test/org/codemetrics"; 
-
-        if(
-          compiler.compileJavaFile(getFile().getAbsolutePath(), outPutFolder) ){
-          Class loadedClass = (new ClassLoader()).loadJavaClass(outPutFolder, "integerToStringManually.IntegerToStringManually");
-          this.methods = loadedClass.getMethods();
-        }
+        CodeMetricsClassLoader loader = new CodeMetricsClassLoader();
+        Class classLoaded = loader.loadFileAsClass(getFile().getPath());
+        this.methods = classLoaded.getMethods();    
     }
     
     private File getFile() {
