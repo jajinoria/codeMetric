@@ -22,6 +22,7 @@ public class CodeMetricsClassLoader {
     String outPutFolder = "compiledTestFiles/";
 
     public Class loadFileAsClass(String relativePath) {
+        relativePath = relativePath.replace("/","\\");
         compileJavaFile(relativePath);
         return loadJavaClass(getFormattedFilePath(relativePath));
     }
