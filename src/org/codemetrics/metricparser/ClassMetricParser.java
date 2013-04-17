@@ -62,7 +62,7 @@ public class ClassMetricParser {
             codeLine = classReader.readLine();
         }while(codeLine!=null);
         
-        classReader.closeMethodReader();        
+        classReader.closeClassReader();        
         return codeLineMetric;
     }
 

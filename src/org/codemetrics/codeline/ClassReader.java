@@ -39,7 +39,7 @@ public class ClassReader {
         return lineNumber;
     }
 
-    public void closeMethodReader() {
+    public void closeClassReader() {
         if (buffer != null) {
             try {
                 buffer.close();
