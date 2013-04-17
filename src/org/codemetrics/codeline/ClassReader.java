@@ -35,15 +35,6 @@ public class ClassReader {
         throw new RuntimeException("Problems reading the next line");
     }
     
-    public boolean atEndOfClass(){
-        try {
-            return buffer.ready();
-        } catch (IOException ex) {
-            Logger.getLogger(ClassReader.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return false;
-    }
-    
     public int getCurrentLineNumber(){
         return lineNumber;
     }

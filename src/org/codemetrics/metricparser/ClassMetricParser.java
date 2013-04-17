@@ -56,9 +56,11 @@ public class ClassMetricParser {
         CodeLineAnalyzer codeLineAnalyzer = new CodeLineAnalyzer();
         ClassReader classReader = new ClassReader(sourceFile);
         
+        String codeLine = classReader.readLine();
         do{
-            upDateCodeLineMetric(codeLineAnalyzer.determineCodeLineType(classReader.readLine()));
-        }while(!classReader.atEndOfClass());
+            upDateCodeLineMetric(codeLineAnalyzer.determineCodeLineType(codeLine));
+            codeLine = classReader.readLine();
+        }while(codeLine!=null);
         
         classReader.closeMethodReader();        
         return codeLineMetric;
