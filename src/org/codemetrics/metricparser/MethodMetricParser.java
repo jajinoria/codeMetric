@@ -10,7 +10,7 @@ import org.codemetrics.codeline.CodeLineType;
 
 /**
  *
- * @author Daniel & Jose & Johanna
+ * @author Daniel & Johanna
  */
 public class MethodMetricParser {
     

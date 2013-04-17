@@ -1,11 +1,20 @@
 package org.codemetrics.metricparser;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.lang.reflect.Method;
 import java.util.Scanner;
 import org.codemetrics.classloader.CodeMetricsClassLoader;
+import org.codemetrics.codeline.ClassReader;
+import org.codemetrics.codeline.CodeLineAnalyzer;
+import org.codemetrics.codeline.CodeLineMetric;
+import org.codemetrics.codeline.CodeLineType;
+import org.codemetrics.codeline.MethodReader;
 
 public class ClassMetricParser {
+    
+    private CodeLineMetric codeLineMetric = new CodeLineMetric();
 
     public int getNumberOfAttributes(String classFilename) {
         Class classToAnalize = loadClass(classFilename);
@@ -38,6 +47,36 @@ public class ClassMetricParser {
         }
         return 0;
     }
+    
+    public int getNumberOfParameters(Method method){
+        return method.getParameterTypes().length;
+    }
+    
+    public CodeLineMetric getCodeLines(File sourceFile) {         
+        CodeLineAnalyzer codeLineAnalyzer = new CodeLineAnalyzer();
+        ClassReader classReader = new ClassReader(sourceFile);
+        
+        do{
+            upDateCodeLineMetric(codeLineAnalyzer.determineCodeLineType(classReader.readLine()));
+        }while(!classReader.atEndOfClass());
+        
+        classReader.closeMethodReader();        
+        return codeLineMetric;
+    }
+
+    private void upDateCodeLineMetric(CodeLineType codeLineType) {
+        if(codeLineType.equals(CodeLineType.COMMENT))
+            codeLineMetric.incrementCommentLines();
+        if(codeLineType.equals(CodeLineType.EFFECTIVE))
+            codeLineMetric.incrementEffectiveLines();
+        if(codeLineType.equals(CodeLineType.EMPTY))
+            codeLineMetric.incrementEmptyLines();
+        if(codeLineType.equals(CodeLineType.COMMENT_IN_EFFECTIVE)){
+            codeLineMetric.incrementCommentLines();
+            codeLineMetric.incrementEffectiveLines();
+        }        
+    }
+       
 
     private Class loadClass(String classFilename) {
         CodeMetricsClassLoader loader = new CodeMetricsClassLoader();
