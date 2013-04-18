@@ -3,7 +3,7 @@ package org.codemetrics.codeline;
 
 /**
  *
- * @author Daniel & Jose & Johanna
+ * @author Daniel & Johanna
  */
 public class CodeLineMetric {
     private int effectiveCodeLines;
@@ -36,5 +36,11 @@ public class CodeLineMetric {
     
     public void incrementEffectiveLines(){
         this.effectiveCodeLines++;
+    }
+    
+    public void add(CodeLineMetric codeLineMetric){
+        this.commentCodeLines += codeLineMetric.commentCodeLines;
+        this.effectiveCodeLines += codeLineMetric.effectiveCodeLines;
+        this.emptyCodeLines += codeLineMetric.emptyCodeLines;
     }
 }

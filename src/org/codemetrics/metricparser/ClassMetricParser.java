@@ -10,11 +10,10 @@ import org.codemetrics.codeline.ClassReader;
 import org.codemetrics.codeline.CodeLineAnalyzer;
 import org.codemetrics.codeline.CodeLineMetric;
 import org.codemetrics.codeline.CodeLineType;
-import org.codemetrics.codeline.MethodReader;
 
 public class ClassMetricParser {
     
-    private CodeLineMetric codeLineMetric = new CodeLineMetric();
+    private CodeLineMetric codeLineMetric;
 
     public int getNumberOfAttributes(String classFilename) {
         Class classToAnalize = loadClass(classFilename);
@@ -52,9 +51,10 @@ public class ClassMetricParser {
         return method.getParameterTypes().length;
     }
     
-    public CodeLineMetric getCodeLines(File sourceFile) {         
+    public CodeLineMetric getCodeLines(String sourceFile) {   
+        this.codeLineMetric = new CodeLineMetric();
         CodeLineAnalyzer codeLineAnalyzer = new CodeLineAnalyzer();
-        ClassReader classReader = new ClassReader(sourceFile);
+        ClassReader classReader = new ClassReader(getFile(sourceFile));
         
         String codeLine = classReader.readLine();
         do{
@@ -79,7 +79,10 @@ public class ClassMetricParser {
         }        
     }
        
-
+    private File getFile(String absolutePath) {
+        File file = new File(absolutePath);
+        return file;
+    }
     private Class loadClass(String classFilename) {
         CodeMetricsClassLoader loader = new CodeMetricsClassLoader();
         return loader.loadFileAsClass(classFilename);
