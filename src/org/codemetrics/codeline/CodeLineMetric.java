@@ -38,6 +38,22 @@ public class CodeLineMetric {
         this.effectiveCodeLines++;
     }
     
+    public void upDateCodeLineMetric(CodeLineType codeLineType) {
+        if (codeLineType.equals(CodeLineType.COMMENT))
+            incrementCommentLines();
+        
+        if (codeLineType.equals(CodeLineType.EFFECTIVE))
+            incrementEffectiveLines();
+        
+        if (codeLineType.equals(CodeLineType.EMPTY))
+            incrementEmptyLines();
+        
+        if (codeLineType.equals(CodeLineType.COMMENT_IN_EFFECTIVE)) {
+            incrementCommentLines();
+            incrementEffectiveLines();
+        }
+    }
+    
     public void add(CodeLineMetric codeLineMetric){
         this.commentCodeLines += codeLineMetric.commentCodeLines;
         this.effectiveCodeLines += codeLineMetric.effectiveCodeLines;
