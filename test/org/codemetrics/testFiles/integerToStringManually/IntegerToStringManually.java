@@ -16,7 +16,9 @@ public class IntegerToStringManually {
             number = number/10;
         }
         //int a = 5;
+        if(true)
         return "hello";
+        return "Hola";
     }
     
  // public String toStringWithStack(){

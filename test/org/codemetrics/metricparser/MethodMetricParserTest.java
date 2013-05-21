@@ -24,10 +24,10 @@ public class MethodMetricParserTest {
         MethodMetricParser methodParser = new MethodMetricParser();
         initializeMethods();
         CodeLineMetric metric = methodParser.getCodeLines(getFile(), methods[0]);
-        assertTrue(metric.getEffectiveLines()==6);
+        assertTrue(metric.getEffectiveLines()==8);
         assertTrue(metric.getCommentLines()==1);
         assertTrue(metric.getEmptyLines()==0);
-        assertTrue(metric.getTotalCodeLines()==7);
+        assertTrue(metric.getTotalCodeLines()==9);
     }
     
     private void initializeMethods(){

@@ -15,10 +15,10 @@ public class PackageMetricParserTest {
        // initializeMethods();
         CodeLineMetric metric = packageParser.getCodeLines(getFile().getAbsolutePath());
         System.out.println(metric.getTotalCodeLines());
-        assertTrue(metric.getEffectiveLines()==24);
+        assertTrue(metric.getEffectiveLines()==26);
         assertTrue(metric.getCommentLines()==22);
         assertTrue(metric.getEmptyLines()==10);
-        assertTrue(metric.getTotalCodeLines()==56);
+        assertTrue(metric.getTotalCodeLines()==58);
         assertTrue(packageParser.getNumberOfClasses(path)==2);
     }
     
