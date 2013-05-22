@@ -8,10 +8,7 @@ import org.codemetrics.codeline.CodeLineMetric;
 import org.codemetrics.codeline.CodeLineAnalyzer;
 import org.codemetrics.codeline.CodeLineType;
 
-/**
- *
- * @author Daniel & Johanna
- */
+
 public class MethodMetricParser {
     
     private CodeLineMetric codeLineMetric = new CodeLineMetric();

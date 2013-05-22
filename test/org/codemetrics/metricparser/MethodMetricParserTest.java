@@ -1,4 +1,3 @@
-
 package org.codemetrics.metricparser;
 
 import java.io.File;
@@ -11,35 +10,30 @@ import org.codemetrics.codeline.CodeLineMetric;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-/**
- *
- * @author Johanna
- */
 public class MethodMetricParserTest {
-    
+
     private Method[] methods;
-    
+
     @Test
     public void testSomeMethod() {
         MethodMetricParser methodParser = new MethodMetricParser();
         initializeMethods();
         CodeLineMetric metric = methodParser.getCodeLines(getFile(), methods[0]);
-        assertTrue(metric.getEffectiveLines()==8);
-        assertTrue(metric.getCommentLines()==1);
-        assertTrue(metric.getEmptyLines()==0);
-        assertTrue(metric.getTotalCodeLines()==9);
+        assertTrue(metric.getEffectiveLines() == 8);
+        assertTrue(metric.getCommentLines() == 1);
+        assertTrue(metric.getEmptyLines() == 0);
+        assertTrue(metric.getTotalCodeLines() == 9);
     }
-    
-    private void initializeMethods(){
+
+    private void initializeMethods() {
         CodeMetricsClassLoader loader = new CodeMetricsClassLoader();
         Class classLoaded = loader.loadFileAsClass(getFile().getPath());
-        this.methods = classLoaded.getMethods();    
+        this.methods = classLoaded.getMethods();
     }
-    
+
     private File getFile() {
-        File file = new File
-       ("test/org/codemetrics/testFiles/"
-                + "integerToStringManually/IntegerToStringManually.java"); 
+        File file = new File("test/org/codemetrics/testFiles/"
+                + "integerToStringManually/IntegerToStringManually.java");
         return file;
     }
 }

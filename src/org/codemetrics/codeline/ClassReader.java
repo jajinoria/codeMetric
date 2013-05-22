@@ -7,10 +7,6 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author Johanna
- */
 public class ClassReader {
 
     private BufferedReader buffer = null;
@@ -23,19 +19,19 @@ public class ClassReader {
             Logger.getLogger(MethodReader.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public String readLine(){
+
+    public String readLine() {
         lineNumber++;
         try {
-            String methodLine = buffer.readLine(); 
-            return  methodLine;
+            String methodLine = buffer.readLine();
+            return methodLine;
         } catch (IOException ex) {
             Logger.getLogger(MethodReader.class.getName()).log(Level.SEVERE, null, ex);
         }
         throw new RuntimeException("Problems reading the next line");
     }
-    
-    public int getCurrentLineNumber(){
+
+    public int getCurrentLineNumber() {
         return lineNumber;
     }
 

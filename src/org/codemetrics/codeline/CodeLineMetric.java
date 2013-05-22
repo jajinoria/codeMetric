@@ -1,60 +1,59 @@
-
 package org.codemetrics.codeline;
 
-/**
- *
- * @author Daniel & Johanna
- */
 public class CodeLineMetric {
+
     private int effectiveCodeLines;
     private int commentCodeLines;
     private int emptyCodeLines;
-   
-    public int getEffectiveLines(){
+
+    public int getEffectiveLines() {
         return effectiveCodeLines;
     }
-    
-    public int getCommentLines(){
+
+    public int getCommentLines() {
         return commentCodeLines;
     }
-    
-    public int getEmptyLines(){
+
+    public int getEmptyLines() {
         return emptyCodeLines;
     }
-    
-    public int getTotalCodeLines(){
+
+    public int getTotalCodeLines() {
         return effectiveCodeLines + commentCodeLines + emptyCodeLines;
     }
-    
-    public void incrementCommentLines(){
+
+    public void incrementCommentLines() {
         this.commentCodeLines++;
     }
-    
-    public void incrementEmptyLines(){
+
+    public void incrementEmptyLines() {
         this.emptyCodeLines++;
     }
-    
-    public void incrementEffectiveLines(){
+
+    public void incrementEffectiveLines() {
         this.effectiveCodeLines++;
     }
-    
+
     public void upDateCodeLineMetric(CodeLineType codeLineType) {
-        if (codeLineType.equals(CodeLineType.COMMENT))
+        if (codeLineType.equals(CodeLineType.COMMENT)) {
             incrementCommentLines();
-        
-        if (codeLineType.equals(CodeLineType.EFFECTIVE))
+        }
+
+        if (codeLineType.equals(CodeLineType.EFFECTIVE)) {
             incrementEffectiveLines();
-        
-        if (codeLineType.equals(CodeLineType.EMPTY))
+        }
+
+        if (codeLineType.equals(CodeLineType.EMPTY)) {
             incrementEmptyLines();
-        
+        }
+
         if (codeLineType.equals(CodeLineType.COMMENT_IN_EFFECTIVE)) {
             incrementCommentLines();
             incrementEffectiveLines();
         }
     }
-    
-    public void add(CodeLineMetric codeLineMetric){
+
+    public void add(CodeLineMetric codeLineMetric) {
         this.commentCodeLines += codeLineMetric.commentCodeLines;
         this.effectiveCodeLines += codeLineMetric.effectiveCodeLines;
         this.emptyCodeLines += codeLineMetric.emptyCodeLines;

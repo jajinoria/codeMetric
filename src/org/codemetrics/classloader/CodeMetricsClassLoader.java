@@ -1,4 +1,3 @@
-
 package org.codemetrics.classloader;
 
 import java.io.File;
@@ -13,20 +12,16 @@ import javax.tools.JavaFileObject;
 import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
 
-/**
- *
- * @author Johanna
- */
 public class CodeMetricsClassLoader {
-    
+
     String outPutFolder = "compiledTestFiles/";
 
     public Class loadFileAsClass(String relativePath) {
-        relativePath = relativePath.replace("/","\\");
+        relativePath = relativePath.replace("/", "\\");
         compileJavaFile(relativePath);
         return loadJavaClass(getFormattedFilePath(relativePath));
     }
-    
+
     private boolean compileJavaFile(String relativePath) {
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
         StandardJavaFileManager fileManager = compiler.getStandardFileManager(null, null, null);
@@ -48,12 +43,10 @@ public class CodeMetricsClassLoader {
         }
         throw new RuntimeException(" There was a problema with custom ClassLoader");
     }
-    
-    private String getFormattedFilePath(String path){
+
+    private String getFormattedFilePath(String path) {
         String finalPath = path.replace("\\", ".");
-        finalPath = finalPath.substring(finalPath.indexOf(".")+1, finalPath.lastIndexOf("."));
+        finalPath = finalPath.substring(finalPath.indexOf(".") + 1, finalPath.lastIndexOf("."));
         return finalPath;
     }
-   
-    
 }

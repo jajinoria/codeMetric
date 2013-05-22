@@ -12,7 +12,7 @@ import org.codemetrics.codeline.CodeLineMetric;
 import org.codemetrics.codeline.CodeLineType;
 
 public class ClassMetricParser {
-    
+
     private CodeLineMetric codeLineMetric;
 
     public int getNumberOfAttributes(String classFilename) {
@@ -46,43 +46,47 @@ public class ClassMetricParser {
         }
         return 0;
     }
-    
-    public int getNumberOfParameters(Method method){
+
+    public int getNumberOfParameters(Method method) {
         return method.getParameterTypes().length;
     }
-    
-    public CodeLineMetric getCodeLines(String sourceFile) {   
+
+    public CodeLineMetric getCodeLines(String sourceFile) {
         this.codeLineMetric = new CodeLineMetric();
         CodeLineAnalyzer codeLineAnalyzer = new CodeLineAnalyzer();
         ClassReader classReader = new ClassReader(getFile(sourceFile));
-        
+
         String codeLine = classReader.readLine();
-        do{
+        do {
             upDateCodeLineMetric(codeLineAnalyzer.determineCodeLineType(codeLine));
             codeLine = classReader.readLine();
-        }while(codeLine!=null);
-        
-        classReader.closeClassReader();        
+        } while (codeLine != null);
+
+        classReader.closeClassReader();
         return codeLineMetric;
     }
 
     private void upDateCodeLineMetric(CodeLineType codeLineType) {
-        if(codeLineType.equals(CodeLineType.COMMENT))
+        if (codeLineType.equals(CodeLineType.COMMENT)) {
             codeLineMetric.incrementCommentLines();
-        if(codeLineType.equals(CodeLineType.EFFECTIVE))
+        }
+        if (codeLineType.equals(CodeLineType.EFFECTIVE)) {
             codeLineMetric.incrementEffectiveLines();
-        if(codeLineType.equals(CodeLineType.EMPTY))
+        }
+        if (codeLineType.equals(CodeLineType.EMPTY)) {
             codeLineMetric.incrementEmptyLines();
-        if(codeLineType.equals(CodeLineType.COMMENT_IN_EFFECTIVE)){
+        }
+        if (codeLineType.equals(CodeLineType.COMMENT_IN_EFFECTIVE)) {
             codeLineMetric.incrementCommentLines();
             codeLineMetric.incrementEffectiveLines();
-        }        
+        }
     }
-       
+
     private File getFile(String absolutePath) {
         File file = new File(absolutePath);
         return file;
     }
+
     private Class loadClass(String classFilename) {
         CodeMetricsClassLoader loader = new CodeMetricsClassLoader();
         return loader.loadFileAsClass(classFilename);

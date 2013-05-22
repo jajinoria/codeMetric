@@ -12,13 +12,16 @@ public class PackageMetricParser {
         getFiles(sourceDirectory);
         return this.files.size();
     }
-    
-    public CodeLineMetric getCodeLines(String sourceDirectory){
+
+    public CodeLineMetric getCodeLines(String sourceDirectory) {
         CodeLineMetric codeLineMetric = new CodeLineMetric();
         ClassMetricParser classMetricParser = new ClassMetricParser();
-        if(this.files == null) getFiles(sourceDirectory);
-        for(String absPath:this.files)
+        if (this.files == null) {
+            getFiles(sourceDirectory);
+        }
+        for (String absPath : this.files) {
             codeLineMetric.add(classMetricParser.getCodeLines(absPath));
+        }
         return codeLineMetric;
     }
 
@@ -29,17 +32,15 @@ public class PackageMetricParser {
     private void getFiles(String sourceDirectory) {
         File folder = new File(sourceDirectory);
         File[] listOfFiles = folder.listFiles();
-        
+
         this.files = new ArrayList<>();
 
         for (int i = 0; i < listOfFiles.length; i++) {
             if (isJavaFile(listOfFiles[i])) {
                 this.files.add(listOfFiles[i].getAbsolutePath());
-            }
-            else if (listOfFiles[i].isDirectory()){
+            } else if (listOfFiles[i].isDirectory()) {
                 getFiles(listOfFiles[i].getAbsolutePath());
             }
         }
     }
-
 }
