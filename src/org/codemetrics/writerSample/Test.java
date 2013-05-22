@@ -3,9 +3,7 @@ package org.codemetrics.writerSample;
 
 import java.io.File;
 import org.codemetrics.codeline.CodeLineMetric;
-import org.codemetrics.log.MethodMetricLogger;
-import org.codemetrics.log.writer.PDFWriter;
-import org.codemetrics.log.writer.PlainTextWriter;
+
 import org.codemetrics.metricparser.ClassMetricParser;
 
 public class Test {
