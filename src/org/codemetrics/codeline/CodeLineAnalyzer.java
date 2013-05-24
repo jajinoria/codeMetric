@@ -60,8 +60,7 @@ public class CodeLineAnalyzer {
         for (int index = 0; index < limit; index++) {
             String charToString = String.valueOf(codeLine.charAt(index));
             if (toMatch.equals(charToString)) {
-                ocurrences++;
-            }
+                ocurrences++;}
         }
         return ocurrences;
     }
@@ -71,10 +70,8 @@ public class CodeLineAnalyzer {
 
         for (String symbol : getCommentSymbols()) {
             if ((symbolIndexInArray = codeLine.indexOf(symbol)) != -1) {
-                break;
-            }
+                break;}
         }
-
         return symbolIndexInArray;
     }
 
@@ -96,7 +93,7 @@ public class CodeLineAnalyzer {
         symbols.add("*/");
         return symbols;
     }
-
+    
     private int endOfComment() {
         int endOfComment = codeLine.lastIndexOf("*/");
         return endOfComment == -1 ? codeLine.length() : endOfComment;
@@ -123,5 +120,33 @@ public class CodeLineAnalyzer {
 
         return containsMetaExpression(methodFlag, codeLine)
                 & containsMetaExpression(metaExpression, codeLine);
+    }
+    
+     public int isReservedWord(String line){        
+        if (!commentInCodeLine(line)) {
+             return 0;
+         }
+        int cyclomaticComplexity = 0;
+        // TODO no contar las que esten en comments o comment + code
+        line = replaceCommonElements(line);
+        String[] words = line.split(" ");
+            for (int i = 0; i < words.length; i++){
+                if (words[i].equals("if") || words[i].equals("while") || words[i].equals("for") || 
+                    words[i].equals("case") || words[i].equals("&&") || words[i].equals("||") || 
+                    words[i].equals("catch") || words[i].equals("try") || words[i].equals("?")){
+                        cyclomaticComplexity++;
+                }
+            } 
+            return cyclomaticComplexity;
+        
+    }
+     
+        private String replaceCommonElements(String string) {
+        string = string.replace("{", " ");
+        string = string.replace("}", " ");
+        string = string.replace("(", " ");
+        string = string.replace(")", " ");
+        
+        return string;
     }
 }

@@ -24,17 +24,24 @@ public class MethodReader {
         }
     }
 
-    public void goToStartOfMethod(String methodName) {
+ public String goToStartOfMethod(String methodName) {
         String codeLine;
-        while ((codeLine = readLine()) != null) {
-            if (isMethod(codeLine, methodName)) {
+        while ((codeLine = readLine() ) != null) {
+            if (startOfMethod(codeLine, methodName)) {
                 tryToUpdateKeyStack(codeLine);
                 startOfMethodFound = true;
-                break;
+                return codeLine;
             }
         }
+        throw new RuntimeException("Start of method could NOT be found");
     }
-
+ 
+    private boolean startOfMethod(String codeLine, String methodName) {
+       CodeLineAnalyzer codeLineAnalyzer = new CodeLineAnalyzer();
+       return codeLineAnalyzer.isMethod(codeLine, methodName);
+    }
+     
+ 
     public String readLine() {
         lineNumber++;
         try {

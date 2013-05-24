@@ -5,7 +5,8 @@ public class CodeLineMetric {
     private int effectiveCodeLines;
     private int commentCodeLines;
     private int emptyCodeLines;
-
+    
+    
     public int getEffectiveLines() {
         return effectiveCodeLines;
     }

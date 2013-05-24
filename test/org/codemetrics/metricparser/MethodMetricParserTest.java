@@ -23,6 +23,7 @@ public class MethodMetricParserTest {
         assertTrue(metric.getCommentLines() == 1);
         assertTrue(metric.getEmptyLines() == 0);
         assertTrue(metric.getTotalCodeLines() == 9);
+        assertEquals(2,methodParser.getCyclomaticComplexity(getFile(), methods[0]));
     }
 
     private void initializeMethods() {

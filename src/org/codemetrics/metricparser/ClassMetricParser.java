@@ -47,9 +47,7 @@ public class ClassMetricParser {
         return 0;
     }
 
-    public int getNumberOfParameters(Method method) {
-        return method.getParameterTypes().length;
-    }
+   
 
     public CodeLineMetric getCodeLines(String sourceFile) {
         this.codeLineMetric = new CodeLineMetric();
@@ -91,4 +89,5 @@ public class ClassMetricParser {
         CodeMetricsClassLoader loader = new CodeMetricsClassLoader();
         return loader.loadFileAsClass(classFilename);
     }
+ 
 }

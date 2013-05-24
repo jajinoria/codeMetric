@@ -8,7 +8,6 @@ import org.codemetrics.codeline.CodeLineMetric;
 import org.codemetrics.codeline.CodeLineAnalyzer;
 import org.codemetrics.codeline.CodeLineType;
 
-
 public class MethodMetricParser {
     
     private CodeLineMetric codeLineMetric = new CodeLineMetric();
@@ -34,7 +33,8 @@ public class MethodMetricParser {
         methodReader.closeMethodReader();        
         return codeLineMetric;
     }
-
+    
+  
     private void upDateCodeLineMetric(CodeLineType codeLineType) {
         if(codeLineType.equals(CodeLineType.COMMENT))
             codeLineMetric.incrementCommentLines();
@@ -47,5 +47,26 @@ public class MethodMetricParser {
             codeLineMetric.incrementEffectiveLines();
         }        
     }
+    
+    public int getCyclomaticComplexity(File sourceFile, Method method){
+        int cyclomaticComplexity = 0;
+        MethodReader methodReader = new MethodReader(sourceFile);
+        CodeLineAnalyzer codeLineReader = new CodeLineAnalyzer();
+        cyclomaticComplexity+=codeLineReader.isReservedWord(methodReader.goToStartOfMethod(method.getName()));        
+        do{
+            cyclomaticComplexity+=codeLineReader.isReservedWord(methodReader.readLine());
+            
+        }while(!methodReader.atEndOfMethod());
+        
+        methodReader.closeMethodReader();   
+        
+        
+        
+        return cyclomaticComplexity;
+    }
+    
+    
+   
+
     
 }
