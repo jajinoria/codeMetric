@@ -34,6 +34,9 @@ public class MethodMetricParser {
         return codeLineMetric;
     }
     
+    
+    
+    
   
     private void upDateCodeLineMetric(CodeLineType codeLineType) {
         if(codeLineType.equals(CodeLineType.COMMENT))

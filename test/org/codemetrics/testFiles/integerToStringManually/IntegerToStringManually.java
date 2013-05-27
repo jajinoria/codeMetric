@@ -9,7 +9,7 @@ import java.util.Stack;
  */
 public class IntegerToStringManually {
     private Stack stack = new Stack();
-    
+    private String pepe;
     public String integerToString(int number){
         while(number>=1){
            stack.push(number%10);
