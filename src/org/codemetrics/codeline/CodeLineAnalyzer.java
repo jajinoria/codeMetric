@@ -31,7 +31,7 @@ public class CodeLineAnalyzer {
         return !containsMetaExpression(writtenLineMetaExpression, codeLine);
     }
 
-    private boolean containsMetaExpression(String metaExpression, String expression) {
+    public boolean containsMetaExpression(String metaExpression, String expression) {
         Pattern pattern = Pattern.compile(metaExpression);
         Matcher matcher = pattern.matcher(expression);
         return matcher.find();

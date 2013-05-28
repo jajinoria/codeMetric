@@ -21,10 +21,10 @@ public class IntegerToStringManually {
         return "Hola";
     }
     
- // public String toStringWithStack(){
- //       String string = "";
- //       while(!stack.empty())
- //           string+= stack.pop();
- //       return string.trim();
- //   }   
+  public String toStringWithStack(){
+        String string = "";
+        while(!stack.empty())
+            string+= stack.pop();
+       return string.trim();
+    }   
 }

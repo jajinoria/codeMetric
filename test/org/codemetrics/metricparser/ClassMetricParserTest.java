@@ -13,13 +13,13 @@ public class ClassMetricParserTest {
     private String path = getFile().getPath();
 
     @Test
-    public void testSomeMethod() {
+    public void someClass() {
         ClassMetricParser classParser = new ClassMetricParser();
         initializeMethods();
         CodeLineMetric metric = classParser.getCodeLines(getFile().getAbsolutePath());
         System.out.println(metric.getEffectiveLines());
-        assertTrue(metric.getEffectiveLines() == 15);
-        assertTrue(metric.getCommentLines() == 11);
+        assertTrue(metric.getEffectiveLines() == 21);
+        assertTrue(metric.getCommentLines() == 5);
         assertTrue(metric.getEmptyLines() == 4);
         assertTrue(metric.getTotalCodeLines() == 30);
         assertTrue(classParser.getNumberOfAttributes(path) == 2);
