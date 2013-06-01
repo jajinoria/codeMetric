@@ -15,7 +15,7 @@ public class IntegerToStringManually {
            stack.push(number%10);
             number = number/10;
         }
-        //int a = 5;
+        //if
         if(true)
         return "hello";
         return "Hola";

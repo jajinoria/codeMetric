@@ -23,7 +23,7 @@ public class ClassMetricParserTest {
         assertTrue(metric.getEmptyLines() == 4);
         assertTrue(metric.getTotalCodeLines() == 30);
         assertTrue(classParser.getNumberOfAttributes(path) == 2);
-        assertTrue(classParser.getNumberOfMethods(path) == 1);
+        assertTrue(classParser.getNumberOfMethods(path) == 2);
         assertTrue(classParser.getNumberOfImports(path) == 1);
         assertTrue(classParser.calculateLackOfCohesion(path) == 0.5);
     }

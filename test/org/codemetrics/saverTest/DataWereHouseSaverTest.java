@@ -1,4 +1,4 @@
-package org.codemetrics.metricparser;
+package org.codemetrics.saverTest;
 
 import java.io.File;
 import org.codemetrics.cubes.using.DataStoreFactory;
@@ -28,6 +28,6 @@ public class DataWereHouseSaverTest {
     }
 
     private File getDataWareHouse() {
-        return new File("../datawarehouse");
+        return new File("../CubeMetrics");
     }
 }

@@ -62,7 +62,6 @@ public class ClassMetricParser {
                 text = text.substring(index + 1);
                 index = text.indexOf("import");
             }
-
             return count;
         } catch (FileNotFoundException ex) {
         }
@@ -109,4 +108,10 @@ public class ClassMetricParser {
         CodeMetricsClassLoader loader = new CodeMetricsClassLoader();
         return loader.loadFileAsClass(classFilename);
     }
+    
+    
+    
+    
+    
+    
 }
