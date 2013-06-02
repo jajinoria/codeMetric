@@ -15,8 +15,8 @@ public class PackageMetricParserTest {
 
         CodeLineMetric metric = packageParser.getCodeLines(getFile().getAbsolutePath());
         System.out.println(metric.getTotalCodeLines());
-        assertTrue(metric.getEffectiveLines() == 33);
-        assertTrue(metric.getCommentLines() == 16);
+        assertTrue(metric.getEffectiveLines() == 32);
+        assertTrue(metric.getCommentLines() == 17);
         assertTrue(metric.getEmptyLines() == 9);
         assertTrue(metric.getTotalCodeLines() == 58);
         assertTrue(packageParser.getNumberOfClasses(path) == 2);

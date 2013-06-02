@@ -18,15 +18,20 @@ public class ClassMetricParser {
     Field[] atributes;
     Method[] methods;
 
-    public int getNumberOfAttributes(String classFilename) {
+    public ClassMetricParser(String classFilename) {
         Class classToAnalize = loadClass(classFilename);
         this.atributes = classToAnalize.getDeclaredFields();
+        this.methods = classToAnalize.getDeclaredMethods();
+    }
+
+    public ClassMetricParser() {
+    }
+
+    public int getNumberOfAttributes(String classFilename) {
         return atributes.length;
     }
 
     public int getNumberOfMethods(String classFilename) {
-        Class classToAnalize = loadClass(classFilename);
-        this.methods = classToAnalize.getDeclaredMethods();
         return methods.length;
     }
 
@@ -108,10 +113,4 @@ public class ClassMetricParser {
         CodeMetricsClassLoader loader = new CodeMetricsClassLoader();
         return loader.loadFileAsClass(classFilename);
     }
-    
-    
-    
-    
-    
-    
 }

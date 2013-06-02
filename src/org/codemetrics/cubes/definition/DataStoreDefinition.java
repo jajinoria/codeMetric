@@ -20,7 +20,7 @@ public class DataStoreDefinition {
 
         @Override
         public void addMetrics() {
-            setMetricDefinitions(new MetricDefinition[]{LINES_OF_CODE, CLASSES, EFFERENT_COUPLING_LIBRARY, EFFERENT_COUPLING_INTERNAL, AFFERENT_COUPLING});
+            setMetricDefinitions(new MetricDefinition[]{EFFECTIVE_LINES_OF_CODE,COMMENT_LINES_OF_CODE,EMPTY_LINES_OF_CODE,LINES_OF_CODE, CLASSES, EFFERENT_COUPLING_LIBRARY, EFFERENT_COUPLING_INTERNAL, AFFERENT_COUPLING});
         }
     };
     public static final CubeDefinition CLASS_CUBE = new CubeDefinition("ClassCube", TimeScale.DAY) {
@@ -51,6 +51,9 @@ public class DataStoreDefinition {
     };
     public static final MetricDefinition LINES_OF_CODE = new MetricDefinition("LinesOfCode");
     public static final MetricDefinition CLASSES = new MetricDefinition("Classes");
+    public static final MetricDefinition EMPTY_LINES_OF_CODE = new MetricDefinition("EmpyLinesOfCode");
+    public static final MetricDefinition COMMENT_LINES_OF_CODE = new MetricDefinition("ComentsLines");
+    public static final MetricDefinition EFFECTIVE_LINES_OF_CODE = new MetricDefinition("EfectiveLinesOfCode");
     public static final MetricDefinition EFFERENT_COUPLING_LIBRARY = new MetricDefinition("EfferentCouplingLibrary");
     public static final MetricDefinition EFFERENT_COUPLING_INTERNAL = new MetricDefinition("EfferentCouplingInternal");
     public static final MetricDefinition AFFERENT_COUPLING = new MetricDefinition("AfferentCoupling");

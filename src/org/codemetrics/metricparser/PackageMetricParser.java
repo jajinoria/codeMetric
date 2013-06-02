@@ -6,20 +6,20 @@ import org.codemetrics.codeline.CodeLineMetric;
 
 public class PackageMetricParser {
 
-    private ArrayList<String> files;
+    private ArrayList<String> classes;
 
     public int getNumberOfClasses(String sourceDirectory) {
         getFiles(sourceDirectory);
-        return this.files.size();
+        return this.getClasses().size();
     }
 
     public CodeLineMetric getCodeLines(String sourceDirectory) {
         CodeLineMetric codeLineMetric = new CodeLineMetric();
         ClassMetricParser classMetricParser = new ClassMetricParser();
-        if (this.files == null) {
+        if (this.getClasses() == null) {
             getFiles(sourceDirectory);
         }
-        for (String absPath : this.files) {
+        for (String absPath : this.getClasses()) {
             codeLineMetric.add(classMetricParser.getCodeLines(absPath));
         }
         return codeLineMetric;
@@ -33,14 +33,27 @@ public class PackageMetricParser {
         File folder = new File(sourceDirectory);
         File[] listOfFiles = folder.listFiles();
 
-        this.files = new ArrayList<>();
+        this.classes = new ArrayList<>();
 
         for (int i = 0; i < listOfFiles.length; i++) {
             if (isJavaFile(listOfFiles[i])) {
-                this.files.add(listOfFiles[i].getAbsolutePath());
+                this.getClasses().add(listOfFiles[i].toString());
             } else if (listOfFiles[i].isDirectory()) {
-                getFiles(listOfFiles[i].getAbsolutePath());
+                getFiles(listOfFiles[i].toString());
             }
         }
+    }
+
+    /**
+     * @return the classes
+     */
+    public ArrayList<String> getClasses() {
+        return classes;
+    }
+    
+    public ArrayList<String> getPaths(String sourceDirectory)
+    {
+     getFiles(sourceDirectory);
+     return getClasses();
     }
 }

@@ -14,7 +14,7 @@ public class ClassMetricParserTest {
 
     @Test
     public void someClass() {
-        ClassMetricParser classParser = new ClassMetricParser();
+        ClassMetricParser classParser = new ClassMetricParser(path);
         initializeMethods();
         CodeLineMetric metric = classParser.getCodeLines(getFile().getAbsolutePath());
         System.out.println(metric.getEffectiveLines());
