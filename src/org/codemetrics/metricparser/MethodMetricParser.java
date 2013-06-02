@@ -39,7 +39,7 @@ public class MethodMetricParser {
         MethodReader methodReader = new MethodReader(sourceFile);
         methodReader.goToStartOfMethod(methodName);
         do {            
-           contains = analizer.containsMetaExpression(word, methodReader.readLine());         
+           contains = analizer.containsExpressionWithoutComents(word, methodReader.readLine());         
             if (contains == true) {
                 return contains;
             }

@@ -38,6 +38,16 @@ public class CodeLineAnalyzer {
         Matcher matcher = pattern.matcher(expression);
         return matcher.find();
     }
+    
+       public boolean containsExpressionWithoutComents (String metaExpression, String expression)
+    {    this.codeLine = expression;
+         if (containsValidCommentSymbol()) {
+            return false;
+          }
+         return containsMetaExpression(metaExpression, expression);   
+   
+    }
+
 
     private boolean containsValidCommentSymbol() {
         String commentLineMetaExpression = "//|\\*|/\\*|\\*/";
