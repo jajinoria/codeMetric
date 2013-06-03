@@ -15,8 +15,8 @@ import org.codemetrics.codeline.CodeLineType;
 public class ClassMetricParser {
 
     private CodeLineMetric codeLineMetric;
-    Field[] atributes;
-    Method[] methods;
+    private Field[] atributes;
+    private Method[] methods;
 
     public ClassMetricParser(String classFilename) {
         Class classToAnalize = loadClass(classFilename);
@@ -28,19 +28,19 @@ public class ClassMetricParser {
     }
 
     public int getNumberOfAttributes(String classFilename) {
-        return atributes.length;
+        return getAtributes().length;
     }
 
     public int getNumberOfMethods(String classFilename) {
-        return methods.length;
+        return getMethods().length;
     }
 
     public Double sumMF(File sourceFile) {
         Double total = 0.0;
         MethodMetricParser methodParser = new MethodMetricParser();
-        for (int i = 0; i < methods.length; i++) {
-            for (int j = 0; j < atributes.length; j++) {
-                if (methodParser.wordInMethod(sourceFile, methods[i].getName(), atributes[j].getName())) {
+        for (int i = 0; i < getMethods().length; i++) {
+            for (int j = 0; j < getAtributes().length; j++) {
+                if (methodParser.wordInMethod(sourceFile, getMethods()[i].getName(), getAtributes()[j].getName())) {
                     total++;
                 }
             }
@@ -112,5 +112,14 @@ public class ClassMetricParser {
     private Class loadClass(String classFilename) {
         CodeMetricsClassLoader loader = new CodeMetricsClassLoader();
         return loader.loadFileAsClass(classFilename);
+    }
+
+    public Field[] getAtributes() {
+        return atributes;
+    }
+
+    
+    public Method[] getMethods() {
+        return methods;
     }
 }

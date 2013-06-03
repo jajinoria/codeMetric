@@ -1,6 +1,7 @@
 package org.codemetrics.saver;
 
 import java.io.File;
+import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -71,7 +72,8 @@ public class DataWereHouseSaver {
 
     private void insertPackageTuple() {        
         statePackage(buildPackageContext());
-        stateClasses(buildPackageContext());      
+        stateClasses(buildPackageContext());
+        stateMethods(buildPackageContext());
     }
 
     private Cube getCube(CubeDefinition definition) {
@@ -83,32 +85,7 @@ public class DataWereHouseSaver {
         context.put(DataStoreDefinition.MODULES.getName(), "org.core");
         return context;
     }
-
-    private State buildPackageState() {
-        State state = new State();
-        state.put(DataStoreDefinition.CLASSES.getName(), totalOfClasses());
-        state.put(DataStoreDefinition.LINES_OF_CODE.getName(), totalLinesOfCode());
-        state.put(DataStoreDefinition.EMPTY_LINES_OF_CODE.getName(), emptyLinesOfCode());
-        state.put(DataStoreDefinition.EFFECTIVE_LINES_OF_CODE.getName(), effectiveLinesOfCode());
-        state.put(DataStoreDefinition.COMMENT_LINES_OF_CODE.getName(), commentLinesOfCode());
-        return state;
-    }
-
-    
-    private State buildClassesState() {
-        PackageMetricParser packageParser = new PackageMetricParser();
-        State state = new State();
-        for (String path : packageParser.getPaths(this.sourceFolder.toString())) {
-            state.put(DataStoreDefinition.LINES_OF_CODE.getName(), codeLinesOfClasses(path));
-            state.put(DataStoreDefinition.EFFERENT_COUPLING_LIBRARY.getName(), numberOfImports(path));
-            state.put(DataStoreDefinition.LACK_OF_COHESION_OF_METHODS.getName(),lackOfCohesion(path));
-
-        }
-        return state;
-    }
-   
-    
-    private Dimension getDimension(DimensionDefinition definition) {
+     private Dimension getDimension(DimensionDefinition definition) {
         return getDataStore().getDimension(definition.getName());
     }
 
@@ -118,54 +95,6 @@ public class DataWereHouseSaver {
 
     private void add(Tuple tuple) {
         getDataStore().insert(tuple);
-    }
-
-    private double totalLinesOfCode() {
-        PackageMetricParser packageParser = new PackageMetricParser();
-        return packageParser.getCodeLines(this.sourceFolder.getAbsolutePath()).getTotalCodeLines();
-    }
-
-    private double emptyLinesOfCode() {
-        PackageMetricParser packageParser = new PackageMetricParser();
-        return packageParser.getCodeLines(this.sourceFolder.getAbsolutePath()).getEmptyLines();
-    }
-
-    private double effectiveLinesOfCode() {
-        PackageMetricParser packageParser = new PackageMetricParser();
-        return packageParser.getCodeLines(this.sourceFolder.getAbsolutePath()).getEffectiveLines();
-    }
-
-    private double commentLinesOfCode() {
-        PackageMetricParser packageParser = new PackageMetricParser();
-        return packageParser.getCodeLines(this.sourceFolder.getAbsolutePath()).getCommentLines();
-    }
-
-    private double totalOfClasses() {
-        PackageMetricParser packageParser = new PackageMetricParser();      
-        return packageParser.getNumberOfClasses(this.sourceFolder.getAbsolutePath());
-        
-    }
-    
-    
-    private double codeLinesOfClasses(String absolutePath)
-    {
-    ClassMetricParser classParser = new ClassMetricParser();
-    return classParser.getCodeLines(absolutePath).getTotalCodeLines();
-    
-    }
-    
-      private double numberOfImports(String absolutePath)
-    {
-    ClassMetricParser classParser = new ClassMetricParser();
-    return classParser.getNumberOfImports(absolutePath);
-    
-    }
-      
-    private double lackOfCohesion(String absolutePath)
-    {
-    ClassMetricParser classParser = new ClassMetricParser(absolutePath);
-    return classParser.calculateLackOfCohesion(absolutePath);
-    
     }
 
     private void statePackage(Context context) {
@@ -179,4 +108,63 @@ public class DataWereHouseSaver {
         Tuple factShip = new Tuple(getCube(DataStoreDefinition.CLASS_CUBE), context, stateClasses);
         add(factShip);
     }
+    
+    private void stateMethods(Context context) {
+        State stateClasses = buildMethodsState();
+        Tuple factShip = new Tuple(getCube(DataStoreDefinition.METHOD_CUBE), context, stateClasses);
+        add(factShip);
+    }
+
+    
+    private State buildPackageState() {
+        State state = new State();
+        MetricOfPackage packageMetricMethods = new MetricOfPackage();
+        state.put(DataStoreDefinition.CLASSES.getName(), packageMetricMethods.totalOfClasses(this.sourceFolder));
+        state.put(DataStoreDefinition.LINES_OF_CODE.getName(),packageMetricMethods.totalLinesOfCode(this.sourceFolder));
+        state.put(DataStoreDefinition.EMPTY_LINES_OF_CODE.getName(), packageMetricMethods.emptyLinesOfCode(this.sourceFolder));
+        state.put(DataStoreDefinition.EFFECTIVE_LINES_OF_CODE.getName(), packageMetricMethods.effectiveLinesOfCode(this.sourceFolder));
+        state.put(DataStoreDefinition.COMMENT_LINES_OF_CODE.getName(), packageMetricMethods.commentLinesOfCode(this.sourceFolder));
+        
+        return state;
+    }
+
+    
+    private State buildClassesState() {
+        PackageMetricParser packageParser = new PackageMetricParser();
+        MetricOfClasses methodsMetricOfClasses = new MetricOfClasses();
+        State state = new State();
+        for (String path : packageParser.getPaths(this.sourceFolder.toString())) {
+            state.put(DataStoreDefinition.LINES_OF_CODE.getName(), methodsMetricOfClasses.codeLinesOfClasses(path));
+            state.put(DataStoreDefinition.EFFERENT_COUPLING_LIBRARY.getName(), methodsMetricOfClasses.numberOfImports(path));
+            state.put(DataStoreDefinition.LACK_OF_COHESION_OF_METHODS.getName(),methodsMetricOfClasses.lackOfCohesion(path));
+            state.put(DataStoreDefinition.COMMENT_LINES_OF_CODE.getName(), methodsMetricOfClasses.commentCodeLinesOfClasses(path));
+            state.put(DataStoreDefinition.EMPTY_LINES_OF_CODE.getName(), methodsMetricOfClasses.emptyCodeLinesOfClasses(path));
+            state.put(DataStoreDefinition.EFFECTIVE_LINES_OF_CODE.getName(), methodsMetricOfClasses.effectiveCodeLinesOfClasses(path));
+        }
+        return state;
+    }
+    
+    private State buildMethodsState() {
+        PackageMetricParser packageParser = new PackageMetricParser();
+        MetricOfMethods metricOfMethods = new MetricOfMethods();
+        State state = new State();
+        for (String path : packageParser.getPaths(this.sourceFolder.toString())) {
+             ClassMetricParser metricParser= new ClassMetricParser(path);
+             Method[] methods = metricParser.getMethods();
+             for (Method method : methods)
+             {
+             state.put(DataStoreDefinition.CYCLOMATIC_COMPLEXITY.getName(),metricOfMethods.CyclomaticComplexity(getFile(path), method));
+             state.put(DataStoreDefinition.PARAMETERS.getName(), metricOfMethods.NumberOfParameters(method));
+             }
+        }
+        return state;
+        
+        
+        
+    }
+      private File getFile(String filesource) {
+        return new File(filesource);
+    }
+    
+   
 }
