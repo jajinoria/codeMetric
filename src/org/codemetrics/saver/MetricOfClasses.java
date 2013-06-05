@@ -1,6 +1,7 @@
 
 package org.codemetrics.saver;
 
+import java.io.File;
 import org.codemetrics.metricparser.ClassMetricParser;
 
 /**
@@ -37,5 +38,10 @@ public class MetricOfClasses {
     public double commentCodeLinesOfClasses(String absolutePath) {
         ClassMetricParser classParser = new ClassMetricParser(absolutePath);
         return classParser.getCodeLines(absolutePath).getCommentLines();
+    }
+    public File getFile (String absolutePath)
+    {
+     ClassMetricParser classParser = new ClassMetricParser(absolutePath);
+     return classParser.getFile(absolutePath);
     }
 }

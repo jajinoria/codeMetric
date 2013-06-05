@@ -104,7 +104,7 @@ public class ClassMetricParser {
         }
     }
 
-    private File getFile(String absolutePath) {
+    public File getFile(String absolutePath) {
         File file = new File(absolutePath);
         return file;
     }
