@@ -1,4 +1,4 @@
-package org.codemetrics.saver;
+package org.codemetrics.cubes.saver;
 
 import java.io.File;
 import java.lang.reflect.Method;

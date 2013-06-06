@@ -1,5 +1,8 @@
-
-package org.codemetrics.cubes.using;
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package org.codemetrics.cubes.saver;
 
 import java.io.File;
 import org.codemetrics.cubes.definition.CubeDefinition;

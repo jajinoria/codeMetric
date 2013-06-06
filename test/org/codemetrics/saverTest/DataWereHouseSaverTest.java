@@ -1,8 +1,8 @@
 package org.codemetrics.saverTest;
 
 import java.io.File;
-import org.codemetrics.cubes.using.DataStoreFactory;
-import org.codemetrics.saver.DataWereHouseSaver;
+import org.codemetrics.cubes.saver.DataStoreFactory;
+import org.codemetrics.cubes.saver.DataWereHouseSaver;
 import org.junit.Test;
 import org.sumus.dwh.datastore.DataStore;
 
